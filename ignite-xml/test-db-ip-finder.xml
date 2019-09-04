@@ -29,42 +29,23 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
-<!--
-    <property name="cacheConfiguration">
-      <list>
+    <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
 
-        <bean class="org.apache.ignite.configuration.CacheConfiguration">
-          <property name="name" value="default"/>
-          <property name="atomicityMode" value="ATOMIC"/>
-          <property name="backups" value="1"/>
-        </bean>
-      </list>
-    </property>
-    <property name="dataStorageConfiguration">
-    <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
-      <property name="defaultDataRegionConfiguration">
-        <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
-          <property name="persistenceEnabled" value="true"/>
-        </bean>
-      </property>
-    </bean>
-  </property>
--->
-    <property name="discoverySpi">
-      <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
-        <property name="ipFinder">
-          <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.jdbc.TcpDiscoveryJdbcIpFinder">
-            <property name="dataSource" ref="dataSource"/>
-          </bean>
+        <property name="peerClassLoadingEnabled" value="true"/>
+
+        <property name="discoverySpi">
+            <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+                <property name="ipFinder">
+                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.jdbc.TcpDiscoveryJdbcIpFinder">
+                        <property name="dataSource" ref="dataSource"/>
+                    </bean>
+                </property>
+            </bean>
         </property>
-      </bean>
-    </property>
-  </bean>
+    </bean>
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="org.postgresql.Driver" />
-    <property name="url" value="jdbc:postgresql://10.224.131.225/ABC_Kubernetes_Test?user=postgres&amp;password=pass" />
-  </bean>
-
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://10.224.131.225/ABC_Kubernetes_Test?user=postgres&amp;password=pass" />
+    </bean>
 </beans>
